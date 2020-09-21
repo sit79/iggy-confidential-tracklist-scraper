@@ -2,7 +2,7 @@ const scraperObject = {
   url: "https://www.bbc.co.uk/sounds/brand/b03yblbx",
   async scraper(browser) {
     let page = await browser.newPage();
-    console.log(`Navigating to ${this.url}…`);
+    console.log(`navigating to ${this.url}`);
     // navigate to the url
     await page.goto(this.url);
     let urls = await page.$$eval("li > article", (links) => {
