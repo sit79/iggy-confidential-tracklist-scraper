@@ -3,7 +3,7 @@ const scraperObject = {
   async scraper(browser) {
     let page = await browser.newPage();
     console.log(`Navigating to ${this.url}…`);
-    // Navigate to the selected page
+    // navigate to the url
     await page.goto(this.url);
     let urls = await page.$$eval("li > article", (links) => {
       links = links.map((el) => el.querySelector("a").href);
