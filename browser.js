@@ -1,9 +1,11 @@
 const puppeteer = require("puppeteer");
+const ora = require("ora");
 
 async function startBrowser() {
-  let browser;
+  let browser, spinner;
   try {
-    console.log("opening the browser");
+    spinner = ora("opening the browser").start();
+    // console.log("opening the browser");
     browser = await puppeteer.launch({
       headless: true,
       args: ["--disable-setuid-sandbox"],
@@ -12,6 +14,7 @@ async function startBrowser() {
   } catch (error) {
     console.log("Could not create a browser instance => : ", error);
   }
+  spinner.succeed();
   return browser;
 }
 
