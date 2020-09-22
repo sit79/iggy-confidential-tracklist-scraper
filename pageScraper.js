@@ -36,18 +36,15 @@ const scraperObject = {
         });
         await newPage.goto(link);
         await navigationPromise;
-        await console.log("HERE");
         dataObj["title"] = await newPage.title();
         dataObj["tracks"] = await newPage.evaluate(() => {
           let collection = document.querySelectorAll(
             ".sc-c-basic-tile__artist"
           );
+          // TODO refine result collection
+          // we want all individual track titles and artists
           return collection.length;
         });
-        /* dataObj["text"] = await newPage.$$eval(
-          "p.sc-c-basic-tile__artist",
-          (text) => text.innerText
-        ); */
 
         if (dataObj) {
           resolve(dataObj);
@@ -58,7 +55,6 @@ const scraperObject = {
       });
 
     let result = [];
-    // result.push(await pagePromise(urls[0]));
 
     for (let link in urls) {
       let currentPageData = await pagePromise(urls[link]);
