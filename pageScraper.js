@@ -5,17 +5,14 @@ const scraperObject = {
   async scraper(browser) {
     let page = await browser.newPage();
     let spinner = ora(`navigating to ${this.url}`).start();
-    // replaced by spinner
-    // console.log(`navigating to ${this.url}`) ;
 
     // navigate to the url
     await page.goto(this.url);
 
     // wait for required DOM to be rendered
     await page.waitForSelector(".sc-c-list__items");
-    spinner.succeed();
 
-    // getting all desired urls
+    spinner.succeed();
     spinner = ora("retrieving urls").start();
 
     // page.$$eval returns an array of all matching elements
@@ -36,26 +33,27 @@ const scraperObject = {
         });
         await newPage.goto(link);
         await navigationPromise;
-        dataObj["title"] = await newPage.title();
-        dataObj["tracks"] = await newPage.evaluate((nodeCollection) => {
-          // fetch all artists
+        // fetch show title
+        dataObj["showTitle"] = await newPage.title();
+        // fetch all artists
+        dataObj["artists"] = await newPage.evaluate(() => {
           let artistNodeCollection = document.querySelectorAll(
             ".sc-c-basic-tile__artist"
           );
           let artistArray = Array.from(artistNodeCollection).map(
             (item) => item.innerText
           );
-          // fetch all track titles
+          return artistArray;
+        });
+        // fetch all track titles
+        dataObj["trackTitles"] = await newPage.evaluate(() => {
           let titleNodeCollection = document.querySelectorAll(
             ".sc-c-basic-tile__title"
           );
           let titleArray = Array.from(titleNodeCollection).map(
             (item) => item.innerText
           );
-
-          // TODO construct result object
-
-          return null;
+          return titleArray;
         });
 
         if (dataObj) {
@@ -68,18 +66,15 @@ const scraperObject = {
 
     let result = [];
 
-    /*     let currentPageData = await pagePromise(urls[0]);
-    result.push(currentPageData); */
-
     for (let link in urls) {
       let currentPageData = await pagePromise(urls[link]);
       result.push(currentPageData);
     }
 
     await page.close();
-    spinner.succeed().stop();
+    spinner.succeed();
 
-    console.table(result);
+    return result;
   },
 };
 
