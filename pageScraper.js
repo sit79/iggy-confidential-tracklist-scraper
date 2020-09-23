@@ -37,13 +37,25 @@ const scraperObject = {
         await newPage.goto(link);
         await navigationPromise;
         dataObj["title"] = await newPage.title();
-        dataObj["tracks"] = await newPage.evaluate(() => {
-          let collection = document.querySelectorAll(
+        dataObj["tracks"] = await newPage.evaluate((nodeCollection) => {
+          // fetch all artists
+          let artistNodeCollection = document.querySelectorAll(
             ".sc-c-basic-tile__artist"
           );
-          // TODO refine result collection
-          // we want all individual track titles and artists
-          return collection.length;
+          let artistArray = Array.from(artistNodeCollection).map(
+            (item) => item.innerText
+          );
+          // fetch all track titles
+          let titleNodeCollection = document.querySelectorAll(
+            ".sc-c-basic-tile__title"
+          );
+          let titleArray = Array.from(titleNodeCollection).map(
+            (item) => item.innerText
+          );
+
+          // TODO construct result object
+
+          return null;
         });
 
         if (dataObj) {
@@ -55,6 +67,9 @@ const scraperObject = {
       });
 
     let result = [];
+
+    /*     let currentPageData = await pagePromise(urls[0]);
+    result.push(currentPageData); */
 
     for (let link in urls) {
       let currentPageData = await pagePromise(urls[link]);
