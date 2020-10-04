@@ -66,10 +66,15 @@ const scraperObject = {
 
     let result = [];
 
-    for (let link in urls) {
+    // scraping info only for the most recent show
+    let currentPageData = await pagePromise(urls[0]);
+    result.push(currentPageData);
+
+    // uncomment for loop to retrieve data on ALL shows
+    /*     for (let link in urls) {
       let currentPageData = await pagePromise(urls[link]);
       result.push(currentPageData);
-    }
+    } */
 
     await page.close();
     spinner.succeed();
