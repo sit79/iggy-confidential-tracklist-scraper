@@ -37,13 +37,13 @@ async function scrapeAll(browserInstance) {
       let fileExists = fs.existsSync(`${pathToShow}.txt`);
       if (!fileExists) {
         fs.writeFileSync(`${pathToShow}.txt`, showResult, "utf-8", (err) => {
-          if (err) return console.log(err);
+          if (err) return console.error(err);
         });
       }
     }
     spinner.succeed().stop();
   } catch (error) {
-    console.log("Could not resolve the browser instance => ", error);
+    console.error("Could not resolve the browser instance => ", error);
   }
 }
 
