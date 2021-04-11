@@ -33,6 +33,8 @@ const scraperObject = {
         });
         await newPage.goto(link);
         await navigationPromise;
+        // save link location
+        dataObj["showLink"] = link;
         // fetch show title
         dataObj["showTitle"] = await newPage.title();
         // fetch show release date
