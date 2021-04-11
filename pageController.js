@@ -20,7 +20,7 @@ async function scrapeAll(browserInstance) {
         entry.releaseDate.split(" ").slice(2).reverse().join("-") +
         " – " +
         entry.showTitle;
-      let showResult = "";
+      let showResult = `youtube-dl ${entry.showLink} --no-part \n`;
       for (let i = 0, k = entry["artists"].length; i < k; i++) {
         const artistAndTack = `${i + 1}. ${entry["artists"][i]} – ${
           entry["trackTitles"][i]
