@@ -35,6 +35,11 @@ const scraperObject = {
         await navigationPromise;
         // fetch show title
         dataObj["showTitle"] = await newPage.title();
+        // fetch show release date
+        dataObj["releaseDate"] = await newPage.$eval(
+          ".sc-c-episode__metadata__data",
+          (div) => div.textContent
+        );
         // fetch all artists
         dataObj["artists"] = await newPage.evaluate(() => {
           let artistNodeCollection = document.querySelectorAll(
