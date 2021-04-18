@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const browserObject = require("./browser");
 const scraperController = require("./pageController");
 

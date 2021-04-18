@@ -18,6 +18,9 @@
   ],
   "author": "SIT",
   "license": "MIT",
+  "bin": {
+    "iggy": "./index.js"
+  },
   "bugs": {
     "url": "https://github.com/sit79/i-scraper/issues"
   },
