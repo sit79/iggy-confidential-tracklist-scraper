@@ -29,7 +29,7 @@ async function scrapeAll(browserInstance) {
         showResult += artistAndTack;
       }
       // path where I want the file on my computer
-      const pathToShow = path.join(process.env.FILEPATH, fileName);
+      const pathToShow = "/" + path.join(process.env.FILEPATH, fileName);
       // save each show with proper title and the collected result as txt file
       // check if file exists already
       let fileExists = fs.existsSync(`${pathToShow}.txt`);
