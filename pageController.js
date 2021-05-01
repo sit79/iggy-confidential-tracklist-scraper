@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const ora = require("ora");
 const { removeReadMore, cleanShowTitle } = require("./helper");
-require("dotenv").config({ path: "/Users/sit/Documents/Dev/i-scraper/.env", debug: process.env.DEBUG });
+require("dotenv").config({ path: "/home/sit/Dev/i-scraper/.env", debug: process.env.DEBUG });
 
 async function scrapeAll(browserInstance) {
   let browser;
