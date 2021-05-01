@@ -2,6 +2,7 @@ const pageScraper = require("./pageScraper");
 const path = require("path");
 const fs = require("fs");
 const ora = require("ora");
+const { removeReadMore, cleanShowTitle } = require("./helper");
 require("dotenv").config({ path: "/home/sit/Dev/i-scraper/.env", debug: process.env.DEBUG });
 
 async function scrapeAll(browserInstance) {
@@ -21,7 +22,10 @@ async function scrapeAll(browserInstance) {
 
       if (!fileExists) {
         // save each show with proper title and the collected result as txt file
-        let showResult = `youtube-dl ${entry.showLink} --no-part \n`;
+        let showResult = `${cleanShowTitle(entry.showTitle)}\n\n`;
+        showResult += `${entry.releaseDate}\n`;
+        showResult += `${removeReadMore(entry.synopsis)}\n\n`;
+        showResult += `youtube-dl ${entry.showLink} --no-part \n\n`;
         for (let i = 0, k = entry["artists"].length; i < k; i++) {
           const artistAndTack = `${i + 1}. ${entry["artists"][i]} – ${
             entry["trackTitles"][i]
