@@ -51,7 +51,13 @@ const scraperObject = {
         let fileExists = fs.existsSync(`${pathToShow}.txt`);
 
         if (!fileExists) {
-        // fetch all artists
+          // fetch short description
+          dataObj["synopsis"] = await newPage.$eval(
+            ".sc-c-synopsis",
+            (div) => div.textContent
+          );
+
+          // fetch all artists
           dataObj["artists"] = await newPage.evaluate(() => {
             let artistNodeCollection = document.querySelectorAll(
               ".sc-c-basic-tile__artist"
@@ -61,6 +67,7 @@ const scraperObject = {
             );
             return artistArray;
           });
+
           // fetch all track titles
           dataObj["trackTitles"] = await newPage.evaluate(() => {
             let titleNodeCollection = document.querySelectorAll(
