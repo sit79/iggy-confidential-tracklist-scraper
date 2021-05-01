@@ -4,7 +4,7 @@ const ora = require("ora");
 async function startBrowser() {
   let browser, spinner;
   try {
-    spinner = ora("opening the browser").start();
+    spinner = ora("launching browser").start();
     // opening the browser
     browser = await puppeteer.launch({
       headless: true,
