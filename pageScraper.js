@@ -1,4 +1,6 @@
 const ora = require("ora");
+const path = require("path");
+const fs = require("fs");
 
 const scraperObject = {
   url: "https://www.bbc.co.uk/sounds/brand/b03yblbx",
@@ -42,26 +44,34 @@ const scraperObject = {
           ".sc-c-episode__metadata__data",
           (div) => div.textContent
         );
+        dataObj["fileName"] = dataObj.releaseDate.split(" ").slice(2).reverse().join("-") + " – " + dataObj.showTitle;
+
+        // check if file already exists
+        const pathToShow = "/" + path.join(process.env.FILEPATH, dataObj["fileName"]);
+        let fileExists = fs.existsSync(`${pathToShow}.txt`);
+
+        if (!fileExists) {
         // fetch all artists
-        dataObj["artists"] = await newPage.evaluate(() => {
-          let artistNodeCollection = document.querySelectorAll(
-            ".sc-c-basic-tile__artist"
-          );
-          let artistArray = Array.from(artistNodeCollection).map(
-            (item) => item.innerText
-          );
-          return artistArray;
-        });
-        // fetch all track titles
-        dataObj["trackTitles"] = await newPage.evaluate(() => {
-          let titleNodeCollection = document.querySelectorAll(
-            ".sc-c-basic-tile__title"
-          );
-          let titleArray = Array.from(titleNodeCollection).map(
-            (item) => item.innerText
-          );
-          return titleArray;
-        });
+          dataObj["artists"] = await newPage.evaluate(() => {
+            let artistNodeCollection = document.querySelectorAll(
+              ".sc-c-basic-tile__artist"
+            );
+            let artistArray = Array.from(artistNodeCollection).map(
+              (item) => item.innerText
+            );
+            return artistArray;
+          });
+          // fetch all track titles
+          dataObj["trackTitles"] = await newPage.evaluate(() => {
+            let titleNodeCollection = document.querySelectorAll(
+              ".sc-c-basic-tile__title"
+            );
+            let titleArray = Array.from(titleNodeCollection).map(
+              (item) => item.innerText
+            );
+            return titleArray;
+          });
+        }
 
         if (dataObj) {
           resolve(dataObj);
@@ -74,7 +84,7 @@ const scraperObject = {
     let result = [];
 
     // scraping info only for ONLY THE MOST RECENT show
-    /*     let currentPageData = await pagePromise(urls[0]);
+    /* let currentPageData = await pagePromise(urls[0]);
     result.push(currentPageData); */
 
     // for loop to retrieve data on ALL shows
