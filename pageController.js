@@ -1,5 +1,4 @@
 const pageScraper = require("./pageScraper");
-const path = require("path");
 const fs = require("fs");
 const ora = require("ora");
 const { removeReadMore, cleanShowTitle } = require("./helper");
@@ -16,23 +15,19 @@ async function scrapeAll(browserInstance) {
     let spinner = ora("saving files").start();
 
     for (let entry of scrapedData) {
-      // create path to save the file(s) & check if file exists already
-      const pathToShow = "/" + path.join(process.env.FILEPATH, entry["fileName"]);
-      let fileExists = fs.existsSync(`${pathToShow}.txt`);
-
-      if (!fileExists) {
+      if (!entry.alreadyScraped) {
         // save each show with proper title and the collected result as txt file
-        let showResult = `${cleanShowTitle(entry.showTitle)}\n\n`;
+        let showResult = `${cleanShowTitle(entry.showTitle)}\n`;
         showResult += `${entry.releaseDate}\n`;
         showResult += `${removeReadMore(entry.synopsis)}\n\n`;
-        showResult += `youtube-dl ${entry.showLink} --no-part \n\n`;
-        for (let i = 0, k = entry["artists"].length; i < k; i++) {
-          const artistAndTack = `${i + 1}. ${entry["artists"][i]} – ${
-            entry["trackTitles"][i]
+        showResult += `youtube-dl ${entry.showLink}\n\n`;
+        for (let i = 0, k = entry.artists.length; i < k; i++) {
+          const artistAndTack = `${i + 1}. ${entry.artists[i]} – ${
+            entry.trackTitles[i]
           } \n`;
           showResult += artistAndTack;
         }
-        fs.writeFileSync(`${pathToShow}.txt`, showResult, "utf-8", (err) => {
+        fs.writeFileSync(`${entry.path}.txt`, showResult, "utf-8", (err) => {
           if (err) return console.error(err);
         });
       }

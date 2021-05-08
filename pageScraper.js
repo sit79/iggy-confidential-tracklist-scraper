@@ -35,6 +35,7 @@ const scraperObject = {
         });
         await newPage.goto(link);
         await navigationPromise;
+
         // save link location
         dataObj["showLink"] = link;
         // fetch show title
@@ -44,13 +45,14 @@ const scraperObject = {
           ".sc-c-episode__metadata__data",
           (div) => div.textContent
         );
+        // create filename & path
         dataObj["fileName"] = dataObj.releaseDate.split(" ").slice(2).reverse().join("-") + " – " + dataObj.showTitle;
+        dataObj["path"] = "/" + path.join(process.env.FILEPATH, dataObj["fileName"]);
 
-        // check if file already exists
-        const pathToShow = "/" + path.join(process.env.FILEPATH, dataObj["fileName"]);
-        let fileExists = fs.existsSync(`${pathToShow}.txt`);
+        // check if file with that name already exists
+        dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["path"]}.txt`);
 
-        if (!fileExists) {
+        if (!dataObj.alreadyScraped) {
           // fetch short description
           dataObj["synopsis"] = await newPage.$eval(
             ".sc-c-synopsis",
