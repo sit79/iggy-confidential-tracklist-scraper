@@ -54,8 +54,7 @@ const scraperObject = {
         dataObj["path"] = "/" + path.join(process.env.FILEPATH, dataObj["fileName"]);
 
         // check if file with that name already exists
-        //dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["path"]}.txt`)        
-        dataObj["alreadyScraped"] = false;
+        dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["path"]}.txt`)        
 
         if (!dataObj.alreadyScraped) {
           // fetch short description
