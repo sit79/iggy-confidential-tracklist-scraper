@@ -1,6 +1,7 @@
 const ora = require("ora");
 const path = require("path");
 const fs = require("fs");
+const { createDate } = require("./helper");
 
 const scraperObject = {
   url: "https://www.bbc.co.uk/sounds/brand/b03yblbx",
@@ -39,18 +40,22 @@ const scraperObject = {
         // save link location
         dataObj["showLink"] = link;
         // fetch show title
-        dataObj["showTitle"] = await newPage.title();
+        dataObj["showTitle"] = await newPage.$eval(
+          ".sc-c-marquee__title-1",
+          (span) => span.textContent
+        );
         // fetch show release date
         dataObj["releaseDate"] = await newPage.$eval(
           ".sc-c-episode__metadata__data",
           (div) => div.textContent
         );
         // create filename & path
-        dataObj["fileName"] = dataObj.releaseDate.split(" ").slice(2).reverse().join("-") + " – " + dataObj.showTitle;
+        dataObj["fileName"] = createDate(dataObj.releaseDate) + " – " + dataObj.showTitle;
         dataObj["path"] = "/" + path.join(process.env.FILEPATH, dataObj["fileName"]);
 
         // check if file with that name already exists
-        dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["path"]}.txt`);
+        //dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["path"]}.txt`)        
+        dataObj["alreadyScraped"] = false;
 
         if (!dataObj.alreadyScraped) {
           // fetch short description
@@ -93,7 +98,7 @@ const scraperObject = {
     let result = [];
 
     // scraping info only for ONLY THE MOST RECENT show
-    /* let currentPageData = await pagePromise(urls[0]);
+/*     let currentPageData = await pagePromise(urls[0]);
     result.push(currentPageData); */
 
     // for loop to retrieve data on ALL shows

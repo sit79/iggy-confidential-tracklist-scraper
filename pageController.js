@@ -1,8 +1,8 @@
 const pageScraper = require("./pageScraper");
 const fs = require("fs");
 const ora = require("ora");
-const { removeReadMore, cleanShowTitle } = require("./helper");
-require("dotenv").config({ path: "/Users/sit/Documents/Dev/i-scraper/.env", debug: process.env.DEBUG });
+const { removeReadMore, cleanShowTitle, createDate } = require("./helper");
+require("dotenv").config({ path: "/Users/tolksdorf/Dev/other/i-scraper/.env", debug: process.env.DEBUG });
 
 async function scrapeAll(browserInstance) {
   let browser;
@@ -17,7 +17,7 @@ async function scrapeAll(browserInstance) {
     for (let entry of scrapedData) {
       if (!entry.alreadyScraped) {
         // save each show with proper title and the collected result as txt file
-        let showResult = `${cleanShowTitle(entry.showTitle)}\n`;
+        let showResult = `${entry.showTitle}\n`;
         showResult += `${entry.releaseDate}\n`;
         showResult += `${removeReadMore(entry.synopsis)}\n\n`;
         showResult += `youtube-dl ${entry.showLink}\n\n`;
