@@ -26,7 +26,20 @@ const cleanShowTitle = (input) => {
   return array.join(" ");
 };
 
+const createDate = (input) => {
+  const timestamp = input.split(" ").slice(2).reverse().join("-");
+  const releaseDate = new Date(timestamp);
+  let day = releaseDate.getDate().toString();
+  if (day.length === 1) day = '0' + day;
+  let month = (releaseDate.getMonth() + 1).toString();
+  if (month.length === 1) month = '0' + month;
+  const year = releaseDate.getFullYear().toString();
+  const releaseDateString = year + '-' + month + '-' + day;
+  return releaseDateString
+}
+
 module.exports = {
   removeReadMore,
-  cleanShowTitle
+  cleanShowTitle,
+  createDate
 };
