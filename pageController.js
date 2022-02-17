@@ -1,7 +1,7 @@
 const pageScraper = require("./pageScraper");
 const fs = require("fs");
 const ora = require("ora");
-const { removeReadMore, cleanShowTitle, createDate } = require("./helper");
+const { removeReadMore } = require("./helper");
 require("dotenv").config({ path: "/Users/tolksdorf/Dev/other/i-scraper/.env", debug: process.env.DEBUG });
 
 async function scrapeAll(browserInstance) {
