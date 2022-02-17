@@ -27,12 +27,13 @@ async function scrapeAll(browserInstance) {
           } \n`;
           showResult += artistAndTack;
         }
-        fs.writeFileSync(`${entry.path}.txt`, showResult, "utf-8", (err) => {
-          if (err) return console.error(err);
-        });
+        fs.writeFileSync(`${entry.path}.txt`, showResult, {encoding: "utf-8" });
+      } else {
+        console.info(`Show \"${entry.showTitle}\" has already been scraped and saved.`);
       }
+      spinner.succeed();
     }
-    spinner.succeed().stop();
+    spinner.stop();
   } catch (error) {
     console.error("Could not resolve the browser instance => ", error);
   }

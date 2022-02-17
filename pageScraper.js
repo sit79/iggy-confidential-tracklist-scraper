@@ -52,9 +52,10 @@ const scraperObject = {
         // create filename & path
         dataObj["fileName"] = createDate(dataObj.releaseDate) + " – " + dataObj.showTitle;
         dataObj["path"] = "/" + path.join(process.env.FILEPATH, dataObj["fileName"]);
+        dataObj["published"] = "/" + path.join(process.env.FILEPATH, "published", dataObj["fileName"]);
 
-        // check if file with that name already exists
-        dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["path"]}.txt`)        
+          // check if file with that name already exists
+        dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["published"]}.txt`) || fs.existsSync(`${dataObj["path"]}.txt`)
 
         if (!dataObj.alreadyScraped) {
           // fetch short description
@@ -100,7 +101,7 @@ const scraperObject = {
 /*     let currentPageData = await pagePromise(urls[0]);
     result.push(currentPageData); */
 
-    // for loop to retrieve data on ALL shows
+    // for loop to retrieve data on ALL AVAILABLE shows
     for (let link in urls) {
       let currentPageData = await pagePromise(urls[link]);
       result.push(currentPageData);
