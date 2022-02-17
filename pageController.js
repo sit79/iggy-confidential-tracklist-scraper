@@ -11,11 +11,14 @@ async function scrapeAll(browserInstance) {
     browser = await browserInstance;
     let scrapedData = await pageScraper.scraper(browser);
     await browser.close();
-
-    let spinner = ora("saving files").start();
+    let spinner = ora("saving files");
 
     for (let entry of scrapedData) {
-      if (!entry.alreadyScraped) {
+      spinner.start();
+      if (entry.alreadyScraped) {
+        // console.info(`Show \"${entry.showTitle}\" has already been scraped and saved.`);
+        spinner.warn(`Show \"${entry.showTitle}\" has already been scraped and saved.`).stop()
+      } else {
         // save each show with proper title and the collected result as txt file
         let showResult = `${entry.showTitle}\n`;
         showResult += `${entry.releaseDate}\n`;
@@ -23,17 +26,14 @@ async function scrapeAll(browserInstance) {
         showResult += `youtube-dl ${entry.showLink}\n\n`;
         for (let i = 0, k = entry.artists.length; i < k; i++) {
           const artistAndTack = `${i + 1}. ${entry.artists[i]} – ${
-            entry.trackTitles[i]
+              entry.trackTitles[i]
           } \n`;
           showResult += artistAndTack;
         }
         fs.writeFileSync(`${entry.path}.txt`, showResult, {encoding: "utf-8" });
-      } else {
-        console.info(`Show \"${entry.showTitle}\" has already been scraped and saved.`);
+        spinner.succeed(`Show \"${entry.showTitle}\" saved.`).stop();
       }
-      spinner.succeed();
     }
-    spinner.stop();
   } catch (error) {
     console.error("Could not resolve the browser instance => ", error);
   }
