@@ -11,12 +11,11 @@ async function scrapeAll(browserInstance) {
     browser = await browserInstance;
     let scrapedData = await pageScraper.scraper(browser);
     await browser.close();
-    let spinner = ora("saving files");
+    let spinner = ora();
 
     for (let entry of scrapedData) {
       spinner.start();
       if (entry.alreadyScraped) {
-        // console.info(`Show \"${entry.showTitle}\" has already been scraped and saved.`);
         spinner.warn(`Show \"${entry.showTitle}\" has already been scraped and saved.`).stop()
       } else {
         // save each show with proper title and the collected result as txt file
@@ -37,6 +36,7 @@ async function scrapeAll(browserInstance) {
   } catch (error) {
     console.error("Could not resolve the browser instance => ", error);
   }
+
 }
 
 module.exports = (browserInstance) => scrapeAll(browserInstance);

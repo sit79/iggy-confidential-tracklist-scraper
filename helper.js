@@ -34,8 +34,7 @@ const createDate = (input) => {
   let month = (releaseDate.getMonth() + 1).toString();
   if (month.length === 1) month = '0' + month;
   const year = releaseDate.getFullYear().toString();
-  const releaseDateString = year + '-' + month + '-' + day;
-  return releaseDateString
+  return year + '-' + month + '-' + day;
 }
 
 module.exports = {
