@@ -2,6 +2,7 @@ const ora = require("ora");
 const path = require("path");
 const fs = require("fs");
 const { createDate } = require("./helper");
+const { filePath } = require('./.config.js');
 
 const scraperObject = {
   url: "https://www.bbc.co.uk/sounds/brand/b03yblbx",
@@ -51,10 +52,11 @@ const scraperObject = {
         );
         // create filename & path
         dataObj["fileName"] = createDate(dataObj.releaseDate) + " – " + dataObj.showTitle;
-        dataObj["path"] = "/" + path.join(process.env.FILEPATH, dataObj["fileName"]);
+        dataObj["path"] = "/" + path.join(filePath, dataObj["fileName"]);
+        dataObj["published"] = "/" + path.join(filePath, "published", dataObj["fileName"]);
 
-        // check if file with that name already exists
-        dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["path"]}.txt`)        
+          // check if file with that name already exists
+        dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["published"]}.txt`) || fs.existsSync(`${dataObj["path"]}.txt`)
 
         if (!dataObj.alreadyScraped) {
           // fetch short description
@@ -68,10 +70,9 @@ const scraperObject = {
             let artistNodeCollection = document.querySelectorAll(
               ".sc-c-basic-tile__artist"
             );
-            let artistArray = Array.from(artistNodeCollection).map(
-              (item) => item.innerText
+            return Array.from(artistNodeCollection).map(
+                (item) => item.innerText
             );
-            return artistArray;
           });
 
           // fetch all track titles
@@ -79,10 +80,9 @@ const scraperObject = {
             let titleNodeCollection = document.querySelectorAll(
               ".sc-c-basic-tile__title"
             );
-            let titleArray = Array.from(titleNodeCollection).map(
-              (item) => item.innerText
+              return Array.from(titleNodeCollection).map(
+                (item) => item.innerText
             );
-            return titleArray;
           });
         }
 
@@ -96,11 +96,7 @@ const scraperObject = {
 
     let result = [];
 
-    // scraping info only for ONLY THE MOST RECENT show
-/*     let currentPageData = await pagePromise(urls[0]);
-    result.push(currentPageData); */
-
-    // for loop to retrieve data on ALL shows
+    // for loop to retrieve data on available shows
     for (let link in urls) {
       let currentPageData = await pagePromise(urls[link]);
       result.push(currentPageData);
