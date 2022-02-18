@@ -2,10 +2,10 @@ const ora = require("ora");
 const path = require("path");
 const fs = require("fs");
 const { createDate } = require("./helper");
-const { filePath } = require('./.config.js');
+const { FILEPATH, SCRAPE_URL } = require("./.config.js");
 
 const scraperObject = {
-  url: "https://www.bbc.co.uk/sounds/brand/b03yblbx",
+  url: SCRAPE_URL,
   async scraper(browser) {
     let page = await browser.newPage();
     let spinner = ora(`navigating to ${this.url}`).start();
@@ -52,8 +52,8 @@ const scraperObject = {
         );
         // create filename & path
         dataObj["fileName"] = createDate(dataObj.releaseDate) + " – " + dataObj.showTitle;
-        dataObj["path"] = "/" + path.join(filePath, dataObj["fileName"]);
-        dataObj["published"] = "/" + path.join(filePath, "published", dataObj["fileName"]);
+        dataObj["path"] = "/" + path.join(FILEPATH, dataObj["fileName"]);
+        dataObj["published"] = "/" + path.join(FILEPATH, "published", dataObj["fileName"]);
 
           // check if file with that name already exists
         dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["published"]}.txt`) || fs.existsSync(`${dataObj["path"]}.txt`)
