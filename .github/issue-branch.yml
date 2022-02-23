@@ -1,9 +1,0 @@
-branchName: 'iggy-${issue.number}' 
-openDraftPR: true
-branches:
-  - label: enhancement
-    prefix: feature/
-  - label: bug
-    prefix: bugfix/
-    - label: question
-    skip: true
