@@ -18,7 +18,7 @@
 .env.test.local
 .env.production.local
 .config.js
-.github
+.github/**
 .idea
 
 google-chrome-stable_current_amd64.deb
