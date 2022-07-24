@@ -26,7 +26,7 @@ const scraperObject = {
     });
 
     spinner.succeed();
-    spinner = ora("retrieving individual page data").start();
+    spinner = ora("retrieving individual page data \n").start();
 
     let pagePromise = (link) =>
       new Promise(async (resolve, reject) => {

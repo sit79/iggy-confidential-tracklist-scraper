@@ -7,7 +7,7 @@ Puppeteer_](https://www.digitalocean.com/community/tutorials/how-to-scrape-a-web
 
 ### Requirements
 
-Node 8+
+Node 12+
 
 ### Setup
 

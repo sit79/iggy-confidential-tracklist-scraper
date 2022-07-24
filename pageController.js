@@ -35,7 +35,6 @@ async function scrapeAll(browserInstance) {
   } catch (error) {
     console.error("Could not resolve the browser instance => ", error);
   }
-
 }
 
 module.exports = (browserInstance) => scrapeAll(browserInstance);
