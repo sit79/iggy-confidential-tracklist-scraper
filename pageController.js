@@ -21,7 +21,7 @@ async function scrapeAll(browserInstance) {
         let showResult = `${entry.showTitle}\n`;
         showResult += `${entry.releaseDate}\n`;
         showResult += `${removeReadMore(entry.synopsis)}\n\n`;
-        showResult += `youtube-dl ${entry.showLink}\n\n`;
+        showResult += `yt-dlp ${entry.showLink}\n\n`;
         for (let i = 0, k = entry.artists.length; i < k; i++) {
           const artistAndTack = `${i + 1}. ${entry.artists[i]} – ${
               entry.trackTitles[i]
