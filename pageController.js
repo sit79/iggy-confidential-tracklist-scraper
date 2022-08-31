@@ -15,7 +15,7 @@ async function scrapeAll(browserInstance) {
     for (let entry of scrapedData) {
       spinner.start();
       if (entry.alreadyScraped) {
-        spinner.warn(`Show \"${entry.showTitle}\" has already been scraped and saved.`).stop()
+        spinner.succeed(`\"${entry.showTitle}\"`).stop()
       } else {
         // save each show with proper title and the collected result as txt file
         let showResult = `${entry.showTitle}\n`;
@@ -29,7 +29,7 @@ async function scrapeAll(browserInstance) {
           showResult += artistAndTack;
         }
         fs.writeFileSync(`${entry.path}.txt`, showResult, {encoding: "utf-8" });
-        spinner.succeed(`Show \"${entry.showTitle}\" saved.`).stop();
+        spinner.warn(`Show \"${entry.showTitle}\"`).stop();
       }
     }
   } catch (error) {
