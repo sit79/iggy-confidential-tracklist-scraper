@@ -29,7 +29,7 @@ async function scrapeAll(browserInstance) {
           showResult += artistAndTack;
         }
         fs.writeFileSync(`${entry.path}.txt`, showResult, {encoding: "utf-8" });
-        spinner.warn(`Show \"${entry.showTitle}\"`).stop();
+        spinner.warn(`\"${entry.showTitle}\" ready to be fetched.`).stop();
       }
     }
   } catch (error) {
