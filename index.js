@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 // const browserObject = require("./browser");
 // const scraperController = require("./pageController");
-import { browserObject } from "./browser";
-import { scraperController } from "./pageController";
+import browserObject from "./browser.js";
+import scraperController from "./pageController.js";
 
 console.log('HALLO');
 
