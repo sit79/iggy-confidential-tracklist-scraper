@@ -2,9 +2,7 @@
 import { browserObject } from "./browser.js";
 import { scraperController } from "./pageController.js";
 
-console.log('RUNNING');
-
 // start the browser and create a browser instance
-// let browserInstance = browserObject.startBrowser();
+let browserInstance = browserObject.startBrowser();
 // pass the browser instance to the scraper controller
-// scraperController(browserInstance);
+scraperController(browserInstance);
