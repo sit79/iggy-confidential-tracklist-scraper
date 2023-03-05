@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// import { browserObject } from "./browser.js";
+import { browserObject } from "./browser.js";
 // import { scraperController } from "./pageController.js";
 
 console.log('HALLO');
