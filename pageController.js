@@ -1,5 +1,5 @@
-import { pageScraper } from "./pageScraper";
-import { removeReadMore } from "./helper";
+import { pageScraper } from "./pageScraper.js";
+import { removeReadMore } from "./helper.js";
 import * as fs from "fs";
 import * as ora from "ora";
 
