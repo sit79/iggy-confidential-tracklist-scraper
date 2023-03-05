@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# local files
+/tracklists/**
+
 # production
 /build
 /dist

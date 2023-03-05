@@ -1,7 +1,7 @@
-const pageScraper = require("./pageScraper");
-const fs = require("fs");
-const ora = require("ora");
-const { removeReadMore } = require("./helper");
+import { pageScraper } from "./pageScraper";
+import { removeReadMore } from "./helper";
+import * as fs from "fs";
+import * as ora from "ora";
 
 async function scrapeAll(browserInstance) {
   let browser;

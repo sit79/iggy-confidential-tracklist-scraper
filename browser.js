@@ -1,5 +1,5 @@
-const puppeteer = require("puppeteer");
-const ora = require("ora");
+import { launch } from "puppeteer";
+import * as ora from "ora";
 
 async function startBrowser() {
   let browser, spinner;

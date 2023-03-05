@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Retrieve all titles from Iggy Pop's current playlist on the BBC.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js --trace-warnings"

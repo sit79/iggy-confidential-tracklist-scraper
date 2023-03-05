@@ -1,8 +1,8 @@
-const ora = require("ora");
-const path = require("path");
-const fs = require("fs");
-const { createDate } = require("./helper");
-const { FILEPATH, SCRAPE_URL } = require("./.config.js");
+import * as ora from "ora";
+import * as path from "path";
+import * as fs from "fs";
+import { createDate } from "./helper";
+import { FILEPATH, SCRAPE_URL } from "./.config.js";
 
 const scraperObject = {
   url: SCRAPE_URL,
