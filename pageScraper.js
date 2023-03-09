@@ -6,6 +6,8 @@ import { createDate } from './helper.js';
 const FILEPATH = process.env.FILEPATH;
 const SCRAPE_URL = process.env.SCRAPE_URL;
 
+console.log(SCRAPE_URL);
+
 const scraperObject = {
   url: SCRAPE_URL,
   async scraper(browser) {
