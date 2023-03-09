@@ -1,8 +1,15 @@
-const ora = require("ora");
-const path = require("path");
-const fs = require("fs");
-const { createDate } = require("./helper");
-const { FILEPATH, SCRAPE_URL } = require("./.config.js");
+import ora from 'ora';
+import path from 'path';
+import fs from 'fs';
+import { createDate } from './helper.js';
+import env from "./.config.cjs";
+
+
+
+const FILEPATH = env.FILEPATH;
+const SCRAPE_URL = env.SCRAPE_URL;
+
+console.log(SCRAPE_URL);
 
 const scraperObject = {
   url: SCRAPE_URL,
@@ -109,4 +116,4 @@ const scraperObject = {
   },
 };
 
-module.exports = scraperObject;
+export default scraperObject;

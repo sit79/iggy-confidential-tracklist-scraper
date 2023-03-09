@@ -1,7 +1,7 @@
-const pageScraper = require("./pageScraper");
-const fs = require("fs");
-const ora = require("ora");
-const { removeReadMore } = require("./helper");
+import pageScraper from './pageScraper.js';
+import { removeReadMore } from './helper.js';
+import fs from 'fs';
+import ora from 'ora';
 
 async function scrapeAll(browserInstance) {
   let browser;
@@ -37,4 +37,4 @@ async function scrapeAll(browserInstance) {
   }
 }
 
-module.exports = (browserInstance) => scrapeAll(browserInstance);
+export default (browserInstance) => scrapeAll(browserInstance);
