@@ -37,4 +37,4 @@ async function scrapeAll(browserInstance) {
   }
 }
 
-module.exports = (browserInstance) => scrapeAll(browserInstance);
+export default (browserInstance) => scrapeAll(browserInstance);
