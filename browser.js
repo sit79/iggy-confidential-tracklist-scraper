@@ -1,5 +1,5 @@
 import { launch } from "puppeteer";
-import * as ora from "ora";
+import ora from 'ora';
 
 async function startBrowser() {
   let browser, spinner;

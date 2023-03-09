@@ -1,7 +1,7 @@
-import pageScraper from "./pageScraper.js";
-import { removeReadMore } from "./helper.js";
-import * as fs from "fs";
-import * as ora from "ora";
+import pageScraper from './pageScraper.js';
+import { removeReadMore } from './helper.js';
+import fs from 'fs';
+import ora from 'ora';
 
 async function scrapeAll(browserInstance) {
   let browser;

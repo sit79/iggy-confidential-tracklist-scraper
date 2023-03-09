@@ -1,7 +1,7 @@
-import * as ora from "ora";
-import * as path from "path";
-import * as fs from "fs";
-import { createDate } from "./helper.js";
+import ora from 'ora';
+import path from 'path';
+import fs from 'fs';
+import { createDate } from './helper.js';
 
 const FILEPATH = process.env.FILEPATH;
 const SCRAPE_URL = process.env.SCRAPE_URL;
