@@ -2,10 +2,12 @@ import ora from 'ora';
 import path from 'path';
 import fs from 'fs';
 import { createDate } from './helper.js';
-import { FILEPATH, SCRAPE_URL } from "./.config.cjs";
+import env from "./.config.cjs";
 
-// const FILEPATH = process.env.FILEPATH;
-// const SCRAPE_URL = process.env.SCRAPE_URL;
+
+
+const FILEPATH = env.FILEPATH;
+const SCRAPE_URL = env.SCRAPE_URL;
 
 console.log(SCRAPE_URL);
 
