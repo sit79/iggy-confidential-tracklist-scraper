@@ -3,4 +3,7 @@ require("dotenv").config({
     debug : process.env.DEBUG
 });
 
-module.exports = { PROCESS: process.env };
+const FILEPATH = process.env.FILEPATH;
+const SCRAPE_URL = process.env.SCRAPE_URL;
+
+export { FILEPATH, SCRAPE_URL };
