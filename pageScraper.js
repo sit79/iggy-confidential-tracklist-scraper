@@ -93,7 +93,6 @@ const scraperObject = {
         }
 
         if (dataObj) {
-          console.log(JSON.stringify(dataObj));
           resolve(dataObj);
         } else {
           reject("Failed");
