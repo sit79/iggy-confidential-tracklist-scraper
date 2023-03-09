@@ -57,8 +57,8 @@ const scraperObject = {
         );
         // create filename & path
         dataObj["fileName"] = createDate(dataObj.releaseDate) + " – " + dataObj.showTitle;
-        dataObj["path"] = "/" + path.join(FILEPATH, dataObj["fileName"]);
-        dataObj["published"] = "/" + path.join(FILEPATH, "published", dataObj["fileName"]);
+        dataObj["path"] = path.join(FILEPATH, dataObj["fileName"]);
+        dataObj["published"] = path.join(FILEPATH, "published", dataObj["fileName"]);
 
           // check if file with that name already exists
         dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["published"]}.txt`) || fs.existsSync(`${dataObj["path"]}.txt`);
