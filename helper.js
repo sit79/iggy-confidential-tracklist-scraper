@@ -18,7 +18,7 @@ const createDate = (input) => {
   return year + '-' + month + '-' + day;
 }
 
-module.exports = {
+export {
   removeReadMore,
   createDate
 };
