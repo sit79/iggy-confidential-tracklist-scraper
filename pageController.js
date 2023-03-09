@@ -14,6 +14,7 @@ async function scrapeAll(browserInstance) {
 
     for (let entry of scrapedData) {
       spinner.start();
+      console.log(entry);
       if (entry.alreadyScraped) {
         spinner.succeed(`\"${entry.showTitle}\"`).stop()
       } else {
