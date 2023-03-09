@@ -9,8 +9,6 @@ import env from "./.config.cjs";
 const FILEPATH = env.FILEPATH;
 const SCRAPE_URL = env.SCRAPE_URL;
 
-console.log(SCRAPE_URL);
-
 const scraperObject = {
   url: SCRAPE_URL,
   async scraper(browser) {
