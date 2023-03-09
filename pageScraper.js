@@ -63,7 +63,6 @@ const scraperObject = {
           // check if file with that name already exists
         dataObj["alreadyScraped"] = fs.existsSync(`${dataObj["published"]}.txt`) || fs.existsSync(`${dataObj["path"]}.txt`);
 
-        console.log('SCRAPED YET?');
 
         if (!dataObj.alreadyScraped) {
           // fetch short description
@@ -94,6 +93,7 @@ const scraperObject = {
         }
 
         if (dataObj) {
+          console.log(JSON.stringify(dataObj));
           resolve(dataObj);
         } else {
           reject("Failed");
