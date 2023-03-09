@@ -2,11 +2,9 @@ import * as ora from "ora";
 import * as path from "path";
 import * as fs from "fs";
 import { createDate } from "./helper.js";
-import { FILEPATH } from "./.config.cjs";
-import { SCRAPE_URL } from "./.config.cjs";
 
-// const FILEPATH = process.env.FILEPATH;
-// const SCRAPE_URL = process.env.SCRAPE_URL;
+const FILEPATH = process.env.FILEPATH;
+const SCRAPE_URL = process.env.SCRAPE_URL;
 
 const scraperObject = {
   url: SCRAPE_URL,
