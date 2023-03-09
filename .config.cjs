@@ -3,4 +3,4 @@ require("dotenv").config({
     debug : process.env.DEBUG
 });
 
-module.exports = { FILEPATH: process.env.FILEPATH, SCRAPE_URL: process.env.SCRAPE_URL };
+module.exports = { PROCESS: process.env };
