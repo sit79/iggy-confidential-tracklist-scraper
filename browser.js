@@ -18,6 +18,6 @@ async function startBrowser() {
   return browser;
 }
 
-module.exports = {
+export default {
   startBrowser,
 };
