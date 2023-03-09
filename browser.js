@@ -1,4 +1,4 @@
-import { launch } from "puppeteer";
+import puppeteer from "puppeteer";
 import ora from 'ora';
 
 async function startBrowser() {
